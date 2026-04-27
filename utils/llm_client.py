@@ -13,6 +13,10 @@ load_dotenv()
 _client: anthropic.Anthropic | None = None
 
 
+def is_demo_mode() -> bool:
+    return not bool(os.getenv("ANTHROPIC_API_KEY", "").strip())
+
+
 def get_client() -> anthropic.Anthropic:
     global _client
     if _client is None:

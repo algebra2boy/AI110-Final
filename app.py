@@ -9,6 +9,7 @@ import time
 
 from agent.orchestrator import MoodArcOrchestrator, JourneyResult
 from utils.guardrails import check_input
+from utils.llm_client import is_demo_mode
 
 # ─── Page Config ───────────────────────────────────────────────────────────────
 st.set_page_config(
@@ -82,6 +83,14 @@ st.markdown(
     '<div class="hero-sub">Tell me how you feel. I\'ll plan a musical journey to where you want to be.</div>',
     unsafe_allow_html=True,
 )
+
+if is_demo_mode():
+    st.info(
+        "**Demo Mode** — No `ANTHROPIC_API_KEY` detected. "
+        "Running with pre-built example journeys so you can explore the full UI. "
+        "Add your key to `.env` to enable live Claude responses.",
+        icon="🎭",
+    )
 
 # ─── Example prompts ───────────────────────────────────────────────────────────
 EXAMPLES = [

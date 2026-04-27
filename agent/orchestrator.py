@@ -12,6 +12,7 @@ from agent.music_retriever import RetrievalResult, retrieve_songs
 from agent.playlist_synth import SynthesizedPlaylist, synthesize_playlist
 from agent.evaluator import EvaluationResult, evaluate_arc
 from utils.logger import log_journey
+from utils.llm_client import is_demo_mode
 
 
 @dataclass
@@ -54,6 +55,16 @@ class MoodArcOrchestrator:
         def emit(event: str, data: Any) -> None:
             if on_step:
                 on_step(event, data)
+
+        if is_demo_mode():
+            from agent.demo import get_demo_journey
+            import time
+            result = get_demo_journey(user_input)
+            for step in STEPS:
+                time.sleep(0.3)
+                emit(step, None)
+            log_journey(user_input, result.to_log_dict())
+            return result
 
         emotion = parse_emotion(user_input)
         emit("emotion_parsed", emotion)
