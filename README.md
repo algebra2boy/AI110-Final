@@ -14,7 +14,7 @@ MoodArc extends the Module 3 recommender into a **5-step agentic AI system** tha
 | Feature | Module 3 | MoodArc |
 |---|---|---|
 | Input | Genre/mood dropdowns | Free-text emotional description |
-| AI | Pure algorithm | 5-step Claude agent pipeline |
+| AI | Pure algorithm | 5-step Gemini agent pipeline |
 | Retrieval | Catalog scoring only | RAG from music psychology research |
 | Explanation | Score breakdown | Personalized therapeutic notes |
 | Reliability | Unit tests | AI self-evaluation + confidence scoring |
@@ -37,11 +37,11 @@ User Input (natural language emotional description)
   │              MoodArc Agent Pipeline                  │
   │                                                     │
   │  Step 1: EmotionParser                              │
-  │    Claude → { current_mood, target_mood,            │
+  │    Gemini → { current_mood, target_mood,            │
   │               intensity, themes, context }          │
   │                    │                                │
   │  Step 2: ArcPlanner                                 │
-  │    Claude → { arc: [mood₁ → mood₂ → ... → moodN],  │
+  │    Gemini → { arc: [mood₁ → mood₂ → ... → moodN],  │
   │               iso-principle transitions }           │
   │                    │                                │
   │  Step 3: MusicRetriever (RAG)                       │
@@ -50,10 +50,10 @@ User Input (natural language emotional description)
   │    → top songs per arc step                         │
   │                    │                                │
   │  Step 4: PlaylistSynthesizer                        │
-  │    Claude → personalized notes per song             │
+  │    Gemini → personalized notes per song             │
   │                    │                                │
   │  Step 5: ArcEvaluator                               │
-  │    Claude → confidence score (0–1)                  │
+  │    Gemini → confidence score (0–1)                  │
   │             arc coherence, song fit, therapy logic  │
   └─────────────────────────────────────────────────────┘
          │
@@ -72,7 +72,7 @@ User Input (natural language emotional description)
 ## AI Features Implemented
 
 ### 1. Agentic Workflow ✅ (required + stretch)
-A 5-step pipeline where each Claude call informs the next. The agent:
+A 5-step pipeline where each Gemini call informs the next. The agent:
 - Parses unstructured emotion text into structured data
 - Plans a music therapy arc using the ISO principle
 - Retrieves songs scored against each arc step
@@ -110,10 +110,10 @@ pip install -r requirements.txt
 
 ```bash
 cp .env.example .env
-# Edit .env and set your ANTHROPIC_API_KEY
+# Edit .env and set your GEMINI_API_KEY
 ```
 
-Get a key at: https://console.anthropic.com
+Get a key at: https://aistudio.google.com/app/apikey
 
 ### 3. Run the app
 
@@ -183,8 +183,8 @@ Each step has a distinct concern (parse → plan → retrieve → explain → ev
 **Why the ISO principle for arc design?**  
 Music therapy research shows that matching the listener's current emotional state before transitioning is more effective than immediately offering "happier" music. A sad person who receives only upbeat songs often rejects them.
 
-**Why Claude Haiku for most steps?**  
-Cost and speed. Haiku is fast enough for real-time Streamlit streaming and accurate enough for structured JSON tasks. The eval harness uses it for all 5 steps.
+**Why Gemini Flash for most steps?**  
+Cost and speed. Gemini Flash is fast enough for real-time Streamlit streaming and accurate enough for structured JSON tasks. The eval harness uses it for all 5 steps.
 
 **Why real songs with Spotify links vs. fictional ones?**  
 Module 3 used fictional songs for simplicity. MoodArc uses real songs to make the output immediately actionable — users can actually listen.
@@ -242,7 +242,7 @@ moodarc/
 │   ├── songs.json             # 60-song real catalog
 │   └── music_psychology.json  # 13 music therapy research principles (RAG KB)
 ├── utils/
-│   ├── llm_client.py          # Claude API wrapper with prompt caching
+│   ├── llm_client.py          # Gemini API wrapper with prompt caching
 │   ├── logger.py              # Structured logging
 │   └── guardrails.py          # Safety checks
 ├── tests/
