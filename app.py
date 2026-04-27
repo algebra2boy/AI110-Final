@@ -94,26 +94,21 @@ EXAMPLES = [
 
 col_input, col_tips = st.columns([3, 1])
 
-with col_input:
-    # Seed textarea if an example was clicked
-    if "example_text" not in st.session_state:
-        st.session_state.example_text = ""
+with col_tips:
+    st.markdown("**Try an example:**")
+    for i, ex in enumerate(EXAMPLES):
+        if st.button(f"Example {i+1}", key=f"ex_{i}", use_container_width=True):
+            st.session_state["main_input"] = ex
+            st.rerun()
 
+with col_input:
     user_input = st.text_area(
         "How are you feeling? Where do you want to be?",
-        value=st.session_state.example_text,
         placeholder="e.g. 'I'm feeling really sad and lonely tonight. I want to feel a little more hopeful by the end.'",
         height=120,
         key="main_input",
     )
     generate_btn = st.button("🎵 Generate My Journey", type="primary", use_container_width=True)
-
-with col_tips:
-    st.markdown("**Try an example:**")
-    for i, ex in enumerate(EXAMPLES):
-        if st.button(f"Example {i+1}", key=f"ex_{i}", use_container_width=True):
-            st.session_state.example_text = ex
-            st.rerun()
 
 st.divider()
 
