@@ -1,38 +1,41 @@
 """
-Gemini API client for all agent calls.
+Gemini API client for all agent calls (uses google-genai SDK).
 """
 
 from __future__ import annotations
 
 import os
-import google.generativeai as genai
+from google import genai
+from google.genai import types
 from dotenv import load_dotenv
 
 load_dotenv()
 
-_configured = False
+DEFAULT_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.0-flash")
+
+_client: genai.Client | None = None
 
 
 def is_demo_mode() -> bool:
     return not bool(os.getenv("GEMINI_API_KEY", "").strip())
 
 
-def _ensure_configured() -> None:
-    global _configured
-    if not _configured:
+def get_client() -> genai.Client:
+    global _client
+    if _client is None:
         api_key = os.getenv("GEMINI_API_KEY")
         if not api_key:
             raise EnvironmentError(
                 "GEMINI_API_KEY not set. Copy .env.example to .env and add your key."
             )
-        genai.configure(api_key=api_key)
-        _configured = True
+        _client = genai.Client(api_key=api_key)
+    return _client
 
 
 def call_claude(
     system_prompt: str,
     user_message: str,
-    model: str = "gemini-1.5-flash",
+    model: str = DEFAULT_MODEL,
     max_tokens: int = 1024,
     use_cache: bool = True,
 ) -> str:
@@ -40,20 +43,22 @@ def call_claude(
     Call Gemini with a system prompt and user message.
     Signature kept compatible with agent code that calls call_claude().
     """
-    _ensure_configured()
-    m = genai.GenerativeModel(
-        model_name=model,
-        system_instruction=system_prompt,
-        generation_config=genai.GenerationConfig(max_output_tokens=max_tokens),
+    client = get_client()
+    response = client.models.generate_content(
+        model=model,
+        contents=user_message,
+        config=types.GenerateContentConfig(
+            system_instruction=system_prompt,
+            max_output_tokens=max_tokens,
+        ),
     )
-    response = m.generate_content(user_message)
     return response.text
 
 
 def call_claude_json(
     system_prompt: str,
     user_message: str,
-    model: str = "gemini-1.5-flash",
+    model: str = DEFAULT_MODEL,
     max_tokens: int = 1024,
 ) -> str:
     """
