@@ -1,0 +1,106 @@
+[
+  {
+    "id": "mp001",
+    "principle": "Iso Principle",
+    "description": "Music therapy's iso principle: begin with music that matches the listener's current emotional state before gradually transitioning toward the desired state. Abrupt emotional jumps in music can feel jarring and be rejected by the listener.",
+    "application": "Always start an emotional arc with music that meets the listener where they are, not where they want to be.",
+    "mood_relevance": ["sad", "anxious", "angry", "melancholic", "stressed"],
+    "source": "Altschuler (1948), Journal of Music Therapy"
+  },
+  {
+    "id": "mp002",
+    "principle": "Tempo and Heart Rate Entrainment",
+    "description": "The human heart rate naturally synchronizes with external rhythmic stimuli. Music around 60-80 BPM aligns with resting heart rate and promotes calm. Music above 120 BPM elevates arousal and energy.",
+    "application": "To calm someone down, use 60-80 BPM tracks. To energize, use 120+ BPM tracks.",
+    "mood_relevance": ["anxious", "stressed", "calm", "energetic", "motivated"],
+    "source": "Thaut et al. (1997), Neurologic Music Therapy"
+  },
+  {
+    "id": "mp003",
+    "principle": "Minor Key and Emotional Depth",
+    "description": "Music in minor keys tends to evoke feelings of sadness, nostalgia, and introspection. However, this is culturally modulated — minor keys can also feel mysterious or haunting in positive ways.",
+    "application": "Minor key music serves sad and melancholic moods well. Transitioning from minor to major signals emotional shift.",
+    "mood_relevance": ["sad", "melancholic", "nostalgic", "introspective", "lonely"],
+    "source": "Hevner (1935), American Journal of Psychology"
+  },
+  {
+    "id": "mp004",
+    "principle": "Valence-Arousal Model",
+    "description": "Emotions can be mapped on two axes: valence (negative to positive) and arousal (low to high). Music can be selected to shift both dimensions. Moving from low-valence/low-arousal (sad) to high-valence/high-arousal (euphoric) requires intermediate steps through medium-arousal or medium-valence states.",
+    "application": "Use valence and energy scores to create smooth transitions. Don't jump from 0.1 valence to 0.9 in one step.",
+    "mood_relevance": ["sad", "calm", "hopeful", "happy", "euphoric", "energetic"],
+    "source": "Russell (1980), Journal of Personality and Social Psychology"
+  },
+  {
+    "id": "mp005",
+    "principle": "Cathartic Release",
+    "description": "Listening to sad music when already sad can provide emotional relief rather than worsening mood. This 'resonance effect' allows the listener to feel understood and validated before moving toward more positive states.",
+    "application": "For very sad or grieving users, beginning with matching-sad music before transitioning is more effective than immediately offering uplifting tracks.",
+    "mood_relevance": ["sad", "grieving", "lonely", "melancholic"],
+    "source": "Taruffi & Koelsch (2014), PLOS ONE"
+  },
+  {
+    "id": "mp006",
+    "principle": "Music and Dopamine",
+    "description": "Preferred music activates the brain's dopamine system (nucleus accumbens) in ways similar to food and social rewards. The anticipation of a musical peak ('chills') alone triggers dopamine release.",
+    "application": "For motivation and reward circuits, use music with strong builds and peaks. Familiar beloved songs trigger stronger responses.",
+    "mood_relevance": ["motivated", "euphoric", "happy", "empowered"],
+    "source": "Salimpoor et al. (2011), Nature Neuroscience"
+  },
+  {
+    "id": "mp007",
+    "principle": "Anxiety Reduction via Low-Tempo Ambient Music",
+    "description": "Research by Lyz Cooper (British Academy of Sound Therapy) found that 'Weightless' by Marconi Union reduces anxiety by 65% through its use of 60 BPM rhythm, binaural-like layering, and absence of repeating melody (reducing anticipation).",
+    "application": "For high anxiety, begin with very low-energy ambient music before transitioning to more structured tracks.",
+    "mood_relevance": ["anxious", "stressed", "overwhelmed"],
+    "source": "Cooper (2011), British Academy of Sound Therapy"
+  },
+  {
+    "id": "mp008",
+    "principle": "Music and Memory (Autobiographical)",
+    "description": "Music is uniquely powerful at triggering autobiographical memories ('the reminiscence bump'), especially music heard during ages 10-30. Nostalgic music can shift mood positively by connecting listeners to past positive experiences.",
+    "application": "Nostalgic tracks can bridge negative current emotions to positive memories, serving as a transition tool.",
+    "mood_relevance": ["nostalgic", "sad", "lonely", "introspective"],
+    "source": "Janata et al. (2007), Cerebral Cortex"
+  },
+  {
+    "id": "mp009",
+    "principle": "Rhythmic Auditory Stimulation for Motivation",
+    "description": "Strong rhythmic music with a steady beat activates the motor cortex even without movement. This pre-activates physical and mental readiness, making high-BPM music with clear downbeats ideal for motivation.",
+    "application": "For motivating a user, choose tracks with strong, consistent rhythms above 120 BPM.",
+    "mood_relevance": ["motivated", "energetic", "empowered", "focused"],
+    "source": "Thaut et al. (2005), Journal of Neurologic Physical Therapy"
+  },
+  {
+    "id": "mp010",
+    "principle": "Acoustic Instruments and Authenticity Perception",
+    "description": "Listeners often rate acoustic/organic-sounding music as more emotionally authentic and trustworthy during vulnerable emotional states. Electronic production can feel distancing when someone is processing deep emotions.",
+    "application": "For sad, grieving, or highly introspective emotional states, prefer acoustic instruments. Electronic production fits energetic and euphoric states better.",
+    "mood_relevance": ["sad", "melancholic", "introspective", "grieving", "vulnerable"],
+    "source": "Rentfrow & Gosling (2003), Journal of Personality and Social Psychology"
+  },
+  {
+    "id": "mp011",
+    "principle": "Emotional Contagion vs. Aesthetic Distance",
+    "description": "Listeners either experience 'emotional contagion' (feeling what the music expresses) or 'aesthetic distance' (appreciating it intellectually). Very sad people often prefer contagion-style listening; those seeking escape prefer aesthetic distance.",
+    "application": "Present a mix of emotionally resonant and structurally interesting music to accommodate both modes.",
+    "mood_relevance": ["sad", "melancholic", "calm", "introspective"],
+    "source": "Huron (2006), Sweet Anticipation, MIT Press"
+  },
+  {
+    "id": "mp012",
+    "principle": "Empowerment Anthems",
+    "description": "Songs with lyrics emphasizing agency, strength, and overcoming challenge ('empowerment anthems') have measurable effects on feelings of power and confidence. This is distinct from merely upbeat or happy music.",
+    "application": "When transitioning toward empowerment or confidence, choose songs with explicit lyrical themes of strength, not just high energy.",
+    "mood_relevance": ["empowered", "motivated", "hopeful", "uplifting"],
+    "source": "Hsu, Huang, & Tang (2015), Social Psychological and Personality Science"
+  },
+  {
+    "id": "mp013",
+    "principle": "Neoclassical and Focus States",
+    "description": "Minimalist neoclassical piano music (Einaudi, Satie, Debussy) activates default mode network rest AND prefrontal engagement simultaneously, producing a contemplative-focused state that feels both restful and sharp.",
+    "application": "For transitioning from anxious/stressed to calm-focused, neoclassical piano is particularly effective.",
+    "mood_relevance": ["focused", "calm", "serene", "introspective", "peaceful"],
+    "source": "Ramos et al. (2011), Frontiers in Psychology"
+  }
+]
