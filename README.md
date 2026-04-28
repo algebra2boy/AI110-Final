@@ -3,33 +3,12 @@
 > **Base Project:** AI110 Module 3 — Music Recommender Simulation  
 > A content-based filtering system that scored songs against user preferences (genre, mood, energy) using a weighted scoring algorithm.
 
-[![Watch the demo on YouTube](https://img.youtube.com/vi/8KWkmGRaHUo/hqdefault.jpg)](https://youtu.be/8KWkmGRaHUo)
-
 
 MoodArc extends the Module 3 recommender into a **5-step agentic AI system** that takes your emotional state in plain English and plans a personalized musical journey to shift your mood — grounded in music therapy research and transparent AI reasoning at every step.
 
 **Demo Walkthrough**
 
-If you have a recorded walkthrough you can link it here. Two common approaches:
-
-- Host the video on Loom or YouTube and paste a link (GitHub will show a clickable link and sometimes a preview thumbnail):
-
-       Example: https://www.loom.com/share/your-video-id
-
-- Add a small MP4 to the `assets/` folder and embed it directly in the README (GitHub will render the player):
-
-       ```html
-       <video controls width="720">
-              <source src="assets/demo.mp4" type="video/mp4">
-              Your browser does not support the video tag.
-       </video>
-       ```
-
-Or, embed a YouTube preview thumbnail that links to the video (recommended):
-
-[![Watch the demo on YouTube](https://img.youtube.com/vi/8KWkmGRaHUo/hqdefault.jpg)](https://youtu.be/8KWkmGRaHUo)
-
-Note: GitHub strips iframes, so embedding a Loom iframe won't work in a README — use a direct link, a thumbnail image that links to YouTube, or host a small MP4 inside the repo.
+Watch the demo on YouTube: [https://youtu.be/8KWkmGRaHUo](https://youtu.be/8KWkmGRaHUo)
 
 ---
 
