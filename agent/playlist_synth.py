@@ -1,7 +1,8 @@
 """
 Agent Step 4 — Playlist Synthesizer
-Generates personalized explanations for each song choice using Claude.
+Generates personalized explanations for each song choice using Gemini.
 """
+
 from __future__ import annotations
 
 import json
@@ -88,7 +89,9 @@ def synthesize_playlist(
                 "mood": sel.song["mood"],
                 "energy": sel.song["energy"],
                 "arc_step": sel.target_mood,
-                "psychology_context": sel.psychology_snippet[:200] if sel.psychology_snippet else "",
+                "psychology_context": (
+                    sel.psychology_snippet[:200] if sel.psychology_snippet else ""
+                ),
             }
             for sel in flat
         ]
@@ -99,12 +102,15 @@ def synthesize_playlist(
             f"Songs to annotate:\n{json.dumps(song_list, indent=2)}"
         )
 
-        raw = call_claude_json(system_prompt=SYSTEM_PROMPT, user_message=user_msg, max_tokens=2048)
+        raw = call_claude_json(
+            system_prompt=SYSTEM_PROMPT, user_message=user_msg, max_tokens=2048
+        )
 
         try:
             annotations = json.loads(raw)
         except json.JSONDecodeError:
             import re
+
             match = re.search(r"\[.*\]", raw, re.DOTALL)
             annotations = json.loads(match.group()) if match else []
 
@@ -115,8 +121,12 @@ def synthesize_playlist(
             step_songs = []
             for sel in step_selections:
                 ann = annotation_map.get(sel.song["id"], {})
-                query = sel.song.get("spotify_query", f"{sel.song['title']} {sel.song['artist']}")
-                spotify_url = f"https://open.spotify.com/search/{query.replace(' ', '%20')}"
+                query = sel.song.get(
+                    "spotify_query", f"{sel.song['title']} {sel.song['artist']}"
+                )
+                spotify_url = (
+                    f"https://open.spotify.com/search/{query.replace(' ', '%20')}"
+                )
                 step_songs.append(
                     AnnotatedSong(
                         song=sel.song,

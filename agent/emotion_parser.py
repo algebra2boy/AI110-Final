@@ -1,7 +1,8 @@
 """
 Agent Step 1 — Emotion Parser
-Converts free-text emotional description into structured mood data using Claude.
+Converts free-text emotional description into structured mood data using Gemini.
 """
+
 from __future__ import annotations
 
 import json
@@ -58,11 +59,14 @@ def parse_emotion(user_input: str) -> ParsedEmotion:
         except json.JSONDecodeError:
             # Fallback if model returns markdown fences despite instruction
             import re
+
             match = re.search(r"\{.*\}", raw, re.DOTALL)
             if match:
                 data = json.loads(match.group())
             else:
-                raise ValueError(f"Could not parse JSON from emotion parser: {raw[:200]}")
+                raise ValueError(
+                    f"Could not parse JSON from emotion parser: {raw[:200]}"
+                )
 
         return ParsedEmotion(
             current_mood=data.get("current_mood", "neutral"),

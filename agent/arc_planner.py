@@ -2,6 +2,7 @@
 Agent Step 2 — Arc Planner
 Designs an N-step emotional transition arc using the iso principle from music therapy.
 """
+
 from __future__ import annotations
 
 import json
@@ -63,6 +64,7 @@ def plan_arc(emotion: ParsedEmotion) -> EmotionalArc:
             data = json.loads(raw)
         except json.JSONDecodeError:
             import re
+
             match = re.search(r"\{.*\}", raw, re.DOTALL)
             data = json.loads(match.group()) if match else {}
 

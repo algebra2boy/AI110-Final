@@ -20,7 +20,8 @@ st.set_page_config(
 )
 
 # ─── Styling ───────────────────────────────────────────────────────────────────
-st.markdown("""
+st.markdown(
+    """
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
@@ -75,7 +76,9 @@ st.markdown("""
   .stat-num { font-size: 1.8rem; font-weight: 700; color: #a5b4fc; }
   .stat-label { font-size: 0.8rem; color: #64748b; }
 </style>
-""", unsafe_allow_html=True)
+""",
+    unsafe_allow_html=True,
+)
 
 # ─── Header ────────────────────────────────────────────────────────────────────
 st.markdown('<div class="hero-title">🎵 MoodArc</div>', unsafe_allow_html=True)
@@ -86,9 +89,9 @@ st.markdown(
 
 if is_demo_mode():
     st.info(
-        "**Demo Mode** — No `ANTHROPIC_API_KEY` detected. "
+        "**Demo Mode** — No `GEMINI_API_KEY` detected. "
         "Running with pre-built example journeys so you can explore the full UI. "
-        "Add your key to `.env` to enable live Claude responses.",
+        "Add your key to `.env` to enable live Gemini responses.",
         icon="🎭",
     )
 
@@ -117,7 +120,9 @@ with col_input:
         height=120,
         key="main_input",
     )
-    generate_btn = st.button("🎵 Generate My Journey", type="primary", use_container_width=True)
+    generate_btn = st.button(
+        "🎵 Generate My Journey", type="primary", use_container_width=True
+    )
 
 st.divider()
 
@@ -172,41 +177,70 @@ if generate_btn and user_input.strip():
     eval_ = journey.evaluation
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div class="stat-box">
           <div class="stat-num">{len(journey.playlist.arc)}</div>
           <div class="stat-label">Arc Steps</div>
-        </div>""", unsafe_allow_html=True)
+        </div>""",
+            unsafe_allow_html=True,
+        )
     with c2:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div class="stat-box">
           <div class="stat-num">{journey.playlist.total_songs()}</div>
           <div class="stat-label">Songs</div>
-        </div>""", unsafe_allow_html=True)
+        </div>""",
+            unsafe_allow_html=True,
+        )
     with c3:
         conf_pct = int(eval_.overall_confidence * 100)
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div class="stat-box">
           <div class="stat-num" style="color:{eval_.confidence_color()}">{conf_pct}%</div>
           <div class="stat-label">AI Confidence</div>
-        </div>""", unsafe_allow_html=True)
+        </div>""",
+            unsafe_allow_html=True,
+        )
     with c4:
-        st.markdown(f"""
+        st.markdown(
+            f"""
         <div class="stat-box">
           <div class="stat-num">{eval_.confidence_label()}</div>
           <div class="stat-label">Arc Quality</div>
-        </div>""", unsafe_allow_html=True)
+        </div>""",
+            unsafe_allow_html=True,
+        )
 
     st.markdown("")
 
     # ── Arc visualization ─────────────────────────────────────────────────────
     MOOD_VALENCE: dict[str, float] = {
-        "grieving": 0.05, "sad": 0.15, "lonely": 0.20, "melancholic": 0.22,
-        "anxious": 0.28, "stressed": 0.30, "bittersweet": 0.38, "nostalgic": 0.42,
-        "neutral": 0.50, "introspective": 0.45, "calm": 0.55, "peaceful": 0.60,
-        "serene": 0.62, "content": 0.68, "focused": 0.65,
-        "hopeful": 0.72, "uplifting": 0.78, "motivated": 0.82,
-        "happy": 0.86, "energetic": 0.88, "empowered": 0.90, "euphoric": 0.96, "dramatic": 0.50,
+        "grieving": 0.05,
+        "sad": 0.15,
+        "lonely": 0.20,
+        "melancholic": 0.22,
+        "anxious": 0.28,
+        "stressed": 0.30,
+        "bittersweet": 0.38,
+        "nostalgic": 0.42,
+        "neutral": 0.50,
+        "introspective": 0.45,
+        "calm": 0.55,
+        "peaceful": 0.60,
+        "serene": 0.62,
+        "content": 0.68,
+        "focused": 0.65,
+        "hopeful": 0.72,
+        "uplifting": 0.78,
+        "motivated": 0.82,
+        "happy": 0.86,
+        "energetic": 0.88,
+        "empowered": 0.90,
+        "euphoric": 0.96,
+        "dramatic": 0.50,
     }
 
     arc_moods = journey.playlist.arc
@@ -214,30 +248,40 @@ if generate_btn and user_input.strip():
     arc_x = list(range(len(arc_moods)))
 
     fig = go.Figure()
-    fig.add_trace(go.Scatter(
-        x=arc_x, y=arc_y,
-        mode="lines+markers+text",
-        text=arc_moods,
-        textposition="top center",
-        line=dict(color="#6366f1", width=3),
-        marker=dict(
-            size=14,
-            color=arc_y,
-            colorscale=[[0, "#ef4444"], [0.4, "#f59e0b"], [0.65, "#84cc16"], [1.0, "#22c55e"]],
-            line=dict(color="white", width=2),
-        ),
-        textfont=dict(color="#e2e8f0", size=12),
-        fill="tozeroy",
-        fillcolor="rgba(99,102,241,0.08)",
-    ))
+    fig.add_trace(
+        go.Scatter(
+            x=arc_x,
+            y=arc_y,
+            mode="lines+markers+text",
+            text=arc_moods,
+            textposition="top center",
+            line=dict(color="#6366f1", width=3),
+            marker=dict(
+                size=14,
+                color=arc_y,
+                colorscale=[
+                    [0, "#ef4444"],
+                    [0.4, "#f59e0b"],
+                    [0.65, "#84cc16"],
+                    [1.0, "#22c55e"],
+                ],
+                line=dict(color="white", width=2),
+            ),
+            textfont=dict(color="#e2e8f0", size=12),
+            fill="tozeroy",
+            fillcolor="rgba(99,102,241,0.08)",
+        )
+    )
 
     # Mark weak transitions
     for wi in eval_.weak_transitions:
         if wi < len(arc_x) - 1:
             fig.add_shape(
                 type="line",
-                x0=arc_x[wi], x1=arc_x[wi + 1],
-                y0=arc_y[wi], y1=arc_y[wi + 1],
+                x0=arc_x[wi],
+                x1=arc_x[wi + 1],
+                y0=arc_y[wi],
+                y1=arc_y[wi + 1],
                 line=dict(color="#ef4444", width=2, dash="dot"),
             )
 
@@ -247,9 +291,13 @@ if generate_btn and user_input.strip():
         paper_bgcolor="#0f172a",
         plot_bgcolor="#0f172a",
         font=dict(color="#94a3b8"),
-        xaxis=dict(showticklabels=False, showgrid=False, zeroline=False, title="Journey"),
+        xaxis=dict(
+            showticklabels=False, showgrid=False, zeroline=False, title="Journey"
+        ),
         yaxis=dict(
-            range=[0, 1.1], showgrid=True, gridcolor="#1e293b",
+            range=[0, 1.1],
+            showgrid=True,
+            gridcolor="#1e293b",
             tickvals=[0.1, 0.3, 0.5, 0.7, 0.9],
             ticktext=["Very Low", "Low", "Neutral", "Positive", "Euphoric"],
             title="Emotional Positivity",
@@ -269,12 +317,28 @@ if generate_btn and user_input.strip():
     st.markdown("## 🎶 Your Playlist")
 
     MOOD_EMOJIS = {
-        "sad": "😢", "melancholic": "🌧️", "anxious": "😰", "stressed": "😤",
-        "lonely": "🌙", "nostalgic": "📷", "bittersweet": "🍂", "grieving": "💔",
-        "neutral": "😌", "calm": "🌊", "peaceful": "🕊️", "serene": "✨",
-        "content": "☕", "introspective": "🌿", "focused": "🎯",
-        "hopeful": "🌱", "uplifting": "🌤️", "motivated": "⚡",
-        "happy": "😊", "energetic": "🔥", "euphoric": "🎉", "empowered": "💪",
+        "sad": "😢",
+        "melancholic": "🌧️",
+        "anxious": "😰",
+        "stressed": "😤",
+        "lonely": "🌙",
+        "nostalgic": "📷",
+        "bittersweet": "🍂",
+        "grieving": "💔",
+        "neutral": "😌",
+        "calm": "🌊",
+        "peaceful": "🕊️",
+        "serene": "✨",
+        "content": "☕",
+        "introspective": "🌿",
+        "focused": "🎯",
+        "hopeful": "🌱",
+        "uplifting": "🌤️",
+        "motivated": "⚡",
+        "happy": "😊",
+        "energetic": "🔥",
+        "euphoric": "🎉",
+        "empowered": "💪",
     }
 
     for step_idx, (step_mood, step_songs) in enumerate(
@@ -285,9 +349,9 @@ if generate_btn and user_input.strip():
 
         st.markdown(
             f'<div class="step-header">'
-            f'{emoji} Step {step_idx + 1} — {step_mood.title()}'
+            f"{emoji} Step {step_idx + 1} — {step_mood.title()}"
             f'{" ⚠️" if is_weak else ""}'
-            f'</div>',
+            f"</div>",
             unsafe_allow_html=True,
         )
 
@@ -298,7 +362,8 @@ if generate_btn and user_input.strip():
 
         for song in step_songs:
             energy_pct = int(song.energy * 100)
-            st.markdown(f"""
+            st.markdown(
+                f"""
             <div class="song-card">
               <div style="display:flex; justify-content:space-between; align-items:flex-start">
                 <div>
@@ -318,14 +383,16 @@ if generate_btn and user_input.strip():
               {f'<div class="song-why">Why now: {song.why_now}</div>' if song.why_now else ''}
               {f'<div class="psych-note">📚 {song.psychology_snippet[:180]}...</div>' if song.psychology_snippet else ''}
             </div>
-            """, unsafe_allow_html=True)
+            """,
+                unsafe_allow_html=True,
+            )
 
             col_spot, _ = st.columns([1, 3])
             with col_spot:
                 st.markdown(
                     f'<a href="{song.spotify_url}" target="_blank" '
                     f'style="text-decoration:none; color:#1db954; font-size:0.85rem;">'
-                    f'▶ Search on Spotify</a>',
+                    f"▶ Search on Spotify</a>",
                     unsafe_allow_html=True,
                 )
 
@@ -361,7 +428,9 @@ if generate_btn and user_input.strip():
         with col_b:
             st.markdown(f"**Themes:** {', '.join(em.themes)}")
             st.markdown(f"**Context:** {em.context}")
-            st.markdown(f"**Gradual transition needed:** {'Yes' if em.needs_gradual_transition else 'No'}")
+            st.markdown(
+                f"**Gradual transition needed:** {'Yes' if em.needs_gradual_transition else 'No'}"
+            )
 
     st.markdown("")
     st.caption(
@@ -375,14 +444,15 @@ elif generate_btn and not user_input.strip():
 # ─── Sidebar info ─────────────────────────────────────────────────────────────
 with st.sidebar:
     st.markdown("### 🎵 MoodArc")
-    st.markdown("""
+    st.markdown(
+        """
     **How it works:**
 
-    1. **Emotion Parser** — Claude reads your description and extracts current + target mood
+    1. **Emotion Parser** — Gemini reads your description and extracts current + target mood
     2. **Arc Planner** — Designs a step-by-step emotional transition using music therapy's ISO principle
     3. **Music Retriever (RAG)** — Scores 60 real songs using content-based filtering + psychology knowledge base
-    4. **Playlist Synthesizer** — Claude writes personalized notes for each song
-    5. **Arc Evaluator** — Claude rates its own output for coherence and therapeutic logic
+    4. **Playlist Synthesizer** — Gemini writes personalized notes for each song
+    5. **Arc Evaluator** — Gemini rates its own output for coherence and therapeutic logic
 
     ---
     **Base project:** AI110 Module 3 — Music Recommender Simulation
@@ -393,4 +463,5 @@ with st.sidebar:
     - 🛡️ Safety guardrails
     - 📊 AI self-evaluation + confidence scoring
     - 📈 Arc visualization
-    """)
+    """
+    )

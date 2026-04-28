@@ -3,6 +3,7 @@ Agent Step 5 — Arc Evaluator
 Self-evaluates the generated playlist for coherence, therapeutic logic, and arc quality.
 Returns a confidence score and flags any weak transitions.
 """
+
 from __future__ import annotations
 
 import json
@@ -61,7 +62,9 @@ class EvaluationResult:
             return "#ef4444"
 
 
-def evaluate_arc(emotion: ParsedEmotion, playlist: SynthesizedPlaylist) -> EvaluationResult:
+def evaluate_arc(
+    emotion: ParsedEmotion, playlist: SynthesizedPlaylist
+) -> EvaluationResult:
     flat = playlist.flat()
 
     with AgentStepLogger("ArcEvaluator", f"confidence check on {len(flat)} songs"):
@@ -91,6 +94,7 @@ def evaluate_arc(emotion: ParsedEmotion, playlist: SynthesizedPlaylist) -> Evalu
             data = json.loads(raw)
         except json.JSONDecodeError:
             import re
+
             match = re.search(r"\{.*\}", raw, re.DOTALL)
             data = json.loads(match.group()) if match else {}
 

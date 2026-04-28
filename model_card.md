@@ -3,7 +3,7 @@
 ## System Overview
 
 **System name:** MoodArc — AI Emotional Music Journey Planner  
-**Base model:** Gemini Flash 4.5 (`gemini-1.5-flash`) via Google AI Studio  
+**Base model:** Gemini 2.5 Flash Lite (`gemini-2.5-flash-lite`) via Google AI Studio  
 **Task:** Multi-step agentic music recommendation with emotional arc planning  
 **Base project:** AI110 Module 3 — Music Recommender Simulation
 
