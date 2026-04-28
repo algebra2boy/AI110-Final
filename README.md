@@ -3,6 +3,9 @@
 > **Base Project:** AI110 Module 3 — Music Recommender Simulation  
 > A content-based filtering system that scored songs against user preferences (genre, mood, energy) using a weighted scoring algorithm.
 
+[![Watch the demo on YouTube](https://img.youtube.com/vi/8KWkmGRaHUo/hqdefault.jpg)](https://youtu.be/8KWkmGRaHUo)
+
+
 MoodArc extends the Module 3 recommender into a **5-step agentic AI system** that takes your emotional state in plain English and plans a personalized musical journey to shift your mood — grounded in music therapy research and transparent AI reasoning at every step.
 
 **Demo Walkthrough**
